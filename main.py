@@ -14,7 +14,9 @@ def main():
     # Submit through github.
     # Use large enough matrices so that it takes around 10s.
 
-    print(MatrixMultiplication.scalar_multiply(matrixUtils.genMatrix2(100, 5), 10))
+    # print(MatrixMultiplication.scalar_multiply(matrixUtils.genMatrix2(100, 5), 10))
+
+    matrixUtils.printSubarray(MatrixMultiplication.matrix_multiply(matrixUtils.genMatrix(100, 10), matrixUtils.genMatrix(100, 5)), 10)
 
     pass
 
