@@ -17,10 +17,12 @@ def main():
     print("Multiplying a 500x500 matrix with values of 5 with another 500x500 matrix with values of 10:")
 
     start = default_timer()
-    matrixUtils.printSubarray(MatrixMultiplication.matrix_multiply(matrixUtils.readFromFile("test/matrix_500x500_5"), matrixUtils.readFromFile("test/matrix_500x500_10")))
+    matrixUtils.printSubarray(MatrixMultiplication.matrix_multiply(matrixUtils.readFromFile("test/matrix_450x450_5"), matrixUtils.readFromFile("test/matrix_450x450_10")))
     duration = default_timer() - start
     print("Duration: " + str(duration) + "(s)")
 
 
 if __name__ == '__main__':
     main()
+
+    
