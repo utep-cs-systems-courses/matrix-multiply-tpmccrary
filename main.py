@@ -10,9 +10,9 @@ def main():
     # Multiply matrixes. DONE
     # Print small portion of matrix. DONE
     # Time how long it takes to complete matrix multiply. DONE
-    # Include instructions on how to run program.
+    # Include instructions on how to run program. DONE
     # Submit through github.
-    # Use large enough matrices so that it takes around 10s.
+    # Use large enough matrices so that it takes around 10s. DONE
 
     print("Multiplying a 450x450 matrix with values of 5 with another 450x450 matrix with values of 10:")
     start = default_timer()
