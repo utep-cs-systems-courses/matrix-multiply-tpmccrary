@@ -1,11 +1,8 @@
 from typing import List
 
 class MatrixMultiplication:
-    '''Handles matrix multiplication.
+    '''Handles matrix multiplication. Used as a static class.
     '''
-
-    def __init__(self) -> None:
-        pass
 
     def scalar_multiply(matrix_1: List[List[int]], scalar_num: int = 1) -> List[List[int]]:
         '''Multiplies a given matrix by a given scalar integer.
@@ -42,7 +39,7 @@ class MatrixMultiplication:
 
         Args:
             matrix_1 (List[List[int]]): The first given matrix.
-            matrix_2 (List[List[int]]): the second given matrix.
+            matrix_2 (List[List[int]]): The second given matrix.
 
         Returns:
             List[List[int]]: The matrix product.
