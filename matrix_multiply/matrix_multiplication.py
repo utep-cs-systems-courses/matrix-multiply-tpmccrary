@@ -46,10 +46,10 @@ class MatrixMultiplication:
         '''
 
         # Get the row and col sizes for the matrices to be used for later.
-        matrix_1_num_row = len(matrix_1)
-        matrix_1_num_col = len(matrix_1[0])
-        # matrix_2_num_row = len(matrix_2) 
-        matrix_2_num_col = len(matrix_2[0])
+        matrix_1_num_row: int = len(matrix_1)
+        matrix_1_num_col: int = len(matrix_1[0])
+        # matrix_2_num_row: int = len(matrix_2) 
+        matrix_2_num_col: int = len(matrix_2[0])
 
         # Create a new matrix with the correct size.
         matrix_product: List[List[int]] = [[None] * matrix_2_num_col] * matrix_1_num_row

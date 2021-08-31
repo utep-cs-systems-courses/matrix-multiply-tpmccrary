@@ -13,6 +13,7 @@ def main():
     # Include instructions on how to run program. DONE
     # Submit through github.
     # Use large enough matrices so that it takes around 10s. DONE
+    # Add more detail to report, including where the matrix multiplication functions are found.
 
     print("Multiplying a 450x450 matrix with values of 5 with another 450x450 matrix with values of 10:")
     start = default_timer()
