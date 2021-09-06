@@ -74,3 +74,7 @@ class MatrixMultiplication:
 
         return matrix_product
 
+    def matrix_blocked_multiply(matrix_1: List[List[int]], matrix_2: List[List[int]]) -> List[List[int]]:
+        
+        pass
+
