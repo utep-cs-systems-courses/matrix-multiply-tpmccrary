@@ -22,12 +22,19 @@ def main():
     duration = default_timer() - start
     print("Duration: " + str(duration) + "(s)")
 
+    print("Blocked multiplying a 450x450 matrix with values of 5 with another 450x450 matrix with values of 10:")
+    start = default_timer()
+    matrixUtils.printSubarray(MatrixMultiplication.matrix_blocked_multiply(matrixUtils.readFromFile("test/matrix_450x450_5"), matrixUtils.readFromFile("test/matrix_450x450_10"), 25))
+    duration = default_timer() - start
+    print("Duration: " + str(duration) + "(s)")
 
     print("Multiplying two random 450x450 matrices:")
     start = default_timer()
     matrixUtils.printSubarray(MatrixMultiplication.matrix_multiply(matrixUtils.readFromFile("test/matrix_450x450_rand1"), matrixUtils.readFromFile("test/matrix_450x450_rand2")))
     duration = default_timer() - start
     print("Duration: " + str(duration) + "(s)")
+
+
 
 
 if __name__ == '__main__':

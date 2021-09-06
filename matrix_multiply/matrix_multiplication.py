@@ -74,7 +74,25 @@ class MatrixMultiplication:
 
         return matrix_product
 
-    def matrix_blocked_multiply(matrix_1: List[List[int]], matrix_2: List[List[int]]) -> List[List[int]]:
+    def matrix_blocked_multiply(matrix_1: List[List[int]], matrix_2: List[List[int]], tile_size: int) -> List[List[int]]:
         
-        pass
+        matrix_product: List[List[int]] = [[0] * len(matrix_2[0])] * len(matrix_1)
+
+        for kk in range(len(matrix_1)):
+            for jj in range(len(matrix_2)):
+                for i in range(len(matrix_1)):
+                    j_end_val = jj + tile_size
+
+                    for j in range(jj, j_end_val):
+                        k_end_val = kk + tile_size
+
+                        sum = matrix_product[i][j]
+
+                        for k in range(kk, k_end_val):
+                            sum = sum + matrix_1[i][k] * matrix_2[k][j]
+                        
+                        matrix_product[i][j] = sum
+
+
+        return matrix_product
 
