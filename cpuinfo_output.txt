@@ -1,0 +1,2 @@
+model name	: AMD Ryzen 7 5800H with Radeon Graphics
+     16     160     832

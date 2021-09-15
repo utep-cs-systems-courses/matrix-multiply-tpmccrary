@@ -1,8 +1,10 @@
 # Author: Timothy P. McCrary
 
+from typing import List
 from matrix_multiply import matrixUtils
 from matrix_multiply.matrix_multiplication import MatrixMultiplication
 from timeit import default_timer
+import time
 
 def main():
 
@@ -13,8 +15,22 @@ def main():
     # Include instructions on how to run program. DONE
     # Submit through github.
     # Use large enough matrices so that it takes around 10s. DONE
-    # Add more detail to report, including where the matrix multiplication functions are found.
-    # Implement block matrix multiply. Aglorithm can be found on onenote.
+    # Add more detail to report, including where the matrix multiplication functions are found. DONE
+    # Implement block matrix multiply. Aglorithm can be found on onenote. DONE
+    # Implement parallel matrix multiply. Use examples with 1, 2, 4, and 8 threads.
+
+    matrix_1: List[List[int]] = matrixUtils.readFromFile("test/matrix_450x450_5")
+    matrix_2: List[List[int]] = matrixUtils.readFromFile("test/matrix_450x450_10")
+
+    print("Multiplying a 450x450 matrix with values of 5 with another 450x450 matrix with values of 10:")
+    startTime: float = time.clock_gettime(time.CLOCK_THREAD_CPUTIME_ID)
+    matrixUtils.printSubarray(MatrixMultiplication.matrix_multiply(matrix_1, matrix_2))
+    endTime: float = time.clock_gettime(time.CLOCK_THREAD_CPUTIME_ID)
+    elapsedTime: float = endTime - startTime
+    print(f"Duration: {elapsedTime}s")
+
+    return
+    
 
     print("Multiplying a 450x450 matrix with values of 5 with another 450x450 matrix with values of 10:")
     start = default_timer()
