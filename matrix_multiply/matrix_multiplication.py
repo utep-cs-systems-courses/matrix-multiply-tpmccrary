@@ -99,16 +99,16 @@ class MatrixMultiplication:
 
 
     def parallel_matrix_multiply(matrix_1: List[List[int]], matrix_2: List[List[int]], num_threads: int) -> List[List[int]]:
-        '''Given two matrices, multiplies them and returns their product.
-        Note: The number of columns in matrix 1 must be equal to the number of row in matrix 2.
+        """ Given two matrices and a thread amount, multiplies said matrices in parallel (based of thread amount) and returns their product.
 
         Args:
-            matrix_1 (List[List[int]]): The first given matrix.
-            matrix_2 (List[List[int]]): The second given matrix.
+            matrix_1 (List[List[int]]): First given matrix to multiply.
+            matrix_2 (List[List[int]]): Second given matrix to multiply.
+            num_threads (int): Number of threads that will be used to multiply in parallel.
 
         Returns:
             List[List[int]]: The matrix product.
-        '''
+        """
 
         # Get the row and col sizes for the matrices to be used for later.
         matrix_1_num_row: int = len(matrix_1)
@@ -117,16 +117,13 @@ class MatrixMultiplication:
         matrix_2_num_col: int = len(matrix_2[0])
 
         # Create a new matrix with the correct size.
-        # matrix_product: List[List[int]] = [[None] * matrix_2_num_col] * matrix_1_num_row
-        matrix_product = pymp._shared.array((matrix_2_num_col, matrix_1_num_row), int)
-        assigned_start: List = pymp._shared.list()
+        shared_matrix_product = pymp._shared.array((matrix_2_num_col, matrix_1_num_row), int)
 
-        
 
         # Check to make sure the number of cols in the first matrix equals the number of rows in the second matrix.
         if (len(matrix_1[0]) != len(matrix_2)):
             print("ERROR: The number of columns in matrix 1 does not equal the number of rows in matrix 2.\nCANNOT MULTIPLY")
-            return matrix_product
+            return shared_matrix_product
 
         
         with pymp.Parallel(num_threads) as p:
@@ -134,20 +131,26 @@ class MatrixMultiplication:
             product_lock = p.lock
 
             # Go through each row in matrix 1.
+            i: int
             for i in p.range(0, matrix_1_num_row):
                 
                 # Go through each column in matrix 2.
+                j: int
                 for j in range (matrix_2_num_col):
                     dot_product: int = 0
+
                     # Since matrix 1 col == matrix 2 row, we use k to iterate thorugh matrix 1 col and matrix 2 row respectively.
+                    k: int
                     for k in range(matrix_1_num_col):
                         dot_product = (matrix_1[i][k] * matrix_2[k][j]) + dot_product
                     
+                    # This is the critical section.
+                    # Since all the threads are accessing this shard 2D array, I lock it so only one thread can add values to it at a time.
                     product_lock.acquire()
                     # Store the dot product in the new matrix.
-                    matrix_product[i][j] = dot_product
+                    shared_matrix_product[i][j] = dot_product
                     product_lock.release()
 
 
-        return matrix_product
+        return shared_matrix_product
 
