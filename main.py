@@ -18,8 +18,9 @@ def main():
     # Implement block matrix multiply. Aglorithm can be found on onenote. DONE
     # Implement parallel matrix multiply. Use examples with 1, 2, 4, and 8 threads. DONE
 
-    matrix_1: List[List[int]] = matrixUtils.readFromFile("test/matrix_450x450_5")
-    matrix_2: List[List[int]] = matrixUtils.readFromFile("test/matrix_450x450_10")
+    # Matrices that will be used for testing.
+    matrix_1: List[List[int]] = matrixUtils.readFromFile("test/matrix_550x550_5")
+    matrix_2: List[List[int]] = matrixUtils.readFromFile("test/matrix_550x550_10")
 
     run_parallel_matrix_multiply(matrix_1, matrix_2, 1)
     run_parallel_matrix_multiply(matrix_1, matrix_2, 2)
