@@ -1,7 +1,8 @@
 # Matrix Multiply
 
 Matrix Multiplly is a Python program that implements matrix multiplication without the use of external libraries.<br/>
-Additionally, a parallel algorithm has been implemented to speed up the process.
+Additionally, a parallel algorithm has been implemented to speed up the process. <br/>
+### NOTE: Report can be found at bottom of README.
 
 ## Installation
 
@@ -22,7 +23,23 @@ For CLI help:
 ```bash
 python3 main.py -h
 ```
-Example usage running hard-coded parallel algorithm test:
+Outputting:
+```
+Perform matrix multiplication on given files.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -pt, --parallel_test  Run parallel tests?
+  -f, --forloop         Use 3 nested for loops algorithm.
+  -p, --parallel        Use parallel algorithm.
+  -nt NUM_THREAD, --num_thread NUM_THREAD
+                        (int, optional) Number of threads to use in parallel.
+  -f1 FILE1, --file1 FILE1
+                        (str, optional) File path of first matrix to use.
+  -f2 FILE2, --file2 FILE2
+                        (str, optional) File path of second matrix to use.
+```
+### Example usage running hard-coded parallel algorithm test <br/>(recommneded for quick use, without the need for configuration):
 ```bash
 python3 main.py -pt
 ```
