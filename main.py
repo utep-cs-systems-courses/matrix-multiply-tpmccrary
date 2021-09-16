@@ -40,9 +40,9 @@ def main():
 
     args = parser.parse_args()
 
-    useForloop: bool = args.forloop
-    useParallel: bool = args.parallel
-    useTests: bool = args.parallel_test
+    use_forloop: bool = args.forloop
+    use_parallel: bool = args.parallel
+    use_parallel_tests: bool = args.parallel_test
     num_threads: int = args.num_thread
     matrix_1_filename: str = args.file1
     matrix_2_filename: str = args.file2
@@ -53,11 +53,11 @@ def main():
     matrix_2: List[List[int]] = matrixUtils.readFromFile(
         matrix_2_filename)
 
-    if (useParallel == True):
+    if (use_parallel == True):
         run_parallel_matrix_multiply(matrix_1, matrix_2, num_threads)
-    elif (useForloop == True):
+    elif (use_forloop == True):
         run_matrix_multiply(matrix_1, matrix_2)
-    elif (useTests == True):
+    elif (use_parallel_tests == True):
         run_parallel_matrix_multiply(matrix_1, matrix_2, 1)
         run_parallel_matrix_multiply(matrix_1, matrix_2, 2)
         run_parallel_matrix_multiply(matrix_1, matrix_2, 4)
