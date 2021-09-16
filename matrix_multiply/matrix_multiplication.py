@@ -1,3 +1,5 @@
+# Author: Timothy P. McCrary
+
 from typing import List
 import pymp
 
@@ -127,6 +129,8 @@ class MatrixMultiplication:
 
         
         with pymp.Parallel(num_threads) as p:
+
+            # p.print(f"Number of threads being used: {p.num_threads}")
 
             product_lock = p.lock
 
