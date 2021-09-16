@@ -1,4 +1,5 @@
 from typing import List
+import pymp
 
 class MatrixMultiplication:
     '''Handles matrix multiplication. Used as a static class.
@@ -96,7 +97,8 @@ class MatrixMultiplication:
 
         return matrix_product
 
-    def parallel_matrix_multiply(matrix_1: List[List[int]], matrix_2: List[List[int]]) -> List[List[int]]:
+
+    def parallel_matrix_multiply(matrix_1: List[List[int]], matrix_2: List[List[int]], num_threads: int) -> List[List[int]]:
         '''Given two matrices, multiplies them and returns their product.
         Note: The number of columns in matrix 1 must be equal to the number of row in matrix 2.
 
@@ -115,24 +117,36 @@ class MatrixMultiplication:
         matrix_2_num_col: int = len(matrix_2[0])
 
         # Create a new matrix with the correct size.
-        matrix_product: List[List[int]] = [[None] * matrix_2_num_col] * matrix_1_num_row
+        # matrix_product: List[List[int]] = [[None] * matrix_2_num_col] * matrix_1_num_row
+        matrix_product = pymp._shared.array((matrix_2_num_col, matrix_1_num_row), int)
+        assigned_start: List = pymp._shared.list()
+
+        
 
         # Check to make sure the number of cols in the first matrix equals the number of rows in the second matrix.
         if (len(matrix_1[0]) != len(matrix_2)):
             print("ERROR: The number of columns in matrix 1 does not equal the number of rows in matrix 2.\nCANNOT MULTIPLY")
             return matrix_product
 
-        # Go through each row in matrix 1.
-        for i in range(matrix_1_num_row):
-            # Go through each column in matrix 2.
-            for j in range (matrix_2_num_col):
-                dot_product: int = 0
-                # Since matrix 1 col == matrix 2 row, we use k to iterate thorugh matrix 1 col and matrix 2 row respectively.
-                for k in range(matrix_1_num_col):
-                    dot_product = (matrix_1[i][k] * matrix_2[k][j]) + dot_product
+        
+        with pymp.Parallel(num_threads) as p:
+
+            product_lock = p.lock
+
+            # Go through each row in matrix 1.
+            for i in p.range(0, matrix_1_num_row):
                 
-                # Store the dot product in the new matrix.
-                matrix_product[i][j] = dot_product
+                # Go through each column in matrix 2.
+                for j in range (matrix_2_num_col):
+                    dot_product: int = 0
+                    # Since matrix 1 col == matrix 2 row, we use k to iterate thorugh matrix 1 col and matrix 2 row respectively.
+                    for k in range(matrix_1_num_col):
+                        dot_product = (matrix_1[i][k] * matrix_2[k][j]) + dot_product
+                    
+                    product_lock.acquire()
+                    # Store the dot product in the new matrix.
+                    matrix_product[i][j] = dot_product
+                    product_lock.release()
 
 
         return matrix_product

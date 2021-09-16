@@ -3,7 +3,6 @@
 from typing import List
 from matrix_multiply import matrixUtils
 from matrix_multiply.matrix_multiplication import MatrixMultiplication
-from timeit import default_timer
 import time
 
 def main():
@@ -17,38 +16,28 @@ def main():
     # Use large enough matrices so that it takes around 10s. DONE
     # Add more detail to report, including where the matrix multiplication functions are found. DONE
     # Implement block matrix multiply. Aglorithm can be found on onenote. DONE
-    # Implement parallel matrix multiply. Use examples with 1, 2, 4, and 8 threads.
+    # Implement parallel matrix multiply. Use examples with 1, 2, 4, and 8 threads. DONE
 
     matrix_1: List[List[int]] = matrixUtils.readFromFile("test/matrix_450x450_5")
     matrix_2: List[List[int]] = matrixUtils.readFromFile("test/matrix_450x450_10")
 
-    print("Multiplying a 450x450 matrix with values of 5 with another 450x450 matrix with values of 10:")
-    startTime: float = time.clock_gettime(time.CLOCK_THREAD_CPUTIME_ID)
-    matrixUtils.printSubarray(MatrixMultiplication.matrix_multiply(matrix_1, matrix_2))
-    endTime: float = time.clock_gettime(time.CLOCK_THREAD_CPUTIME_ID)
-    elapsedTime: float = endTime - startTime
-    print(f"Duration: {elapsedTime}s")
+    run_parallel_matrix_multiply(matrix_1, matrix_2, 1)
+    run_parallel_matrix_multiply(matrix_1, matrix_2, 2)
+    run_parallel_matrix_multiply(matrix_1, matrix_2, 4)
+    run_parallel_matrix_multiply(matrix_1, matrix_2, 8)
 
-    return
     
 
-    print("Multiplying a 450x450 matrix with values of 5 with another 450x450 matrix with values of 10:")
-    start = default_timer()
-    matrixUtils.printSubarray(MatrixMultiplication.matrix_multiply(matrixUtils.readFromFile("test/matrix_450x450_5"), matrixUtils.readFromFile("test/matrix_450x450_10")))
-    duration = default_timer() - start
-    print("Duration: " + str(duration) + "(s)")
+def run_parallel_matrix_multiply(matrix_1, matrix_2, num_threads):
+    print(f"Multiplying: {len(matrix_1)}x{len(matrix_1[0])} matrix, values = {matrix_1[0][0]} WITH {len(matrix_2)}x{len(matrix_2[0])} matrix, values = {matrix_2[0][0]}.")
+    print(f"Using {num_threads} thread(s).")
 
-    print("Blocked multiplying a 450x450 matrix with values of 5 with another 450x450 matrix with values of 10:")
-    start = default_timer()
-    matrixUtils.printSubarray(MatrixMultiplication.matrix_blocked_multiply(matrixUtils.readFromFile("test/matrix_450x450_5"), matrixUtils.readFromFile("test/matrix_450x450_10"), 25))
-    duration = default_timer() - start
-    print("Duration: " + str(duration) + "(s)")
+    startTime: float = time.clock_gettime(time.CLOCK_THREAD_CPUTIME_ID)
+    matrixUtils.printSubarray(MatrixMultiplication.parallel_matrix_multiply(matrix_1, matrix_2, num_threads))
+    endTime: float = time.clock_gettime(time.CLOCK_THREAD_CPUTIME_ID)
+    elapsedTime: float = endTime - startTime
 
-    print("Multiplying two random 450x450 matrices:")
-    start = default_timer()
-    matrixUtils.printSubarray(MatrixMultiplication.matrix_multiply(matrixUtils.readFromFile("test/matrix_450x450_rand1"), matrixUtils.readFromFile("test/matrix_450x450_rand2")))
-    duration = default_timer() - start
-    print("Duration: " + str(duration) + "(s)")
+    print(f"Duration: {elapsedTime}s\n")
 
 
 
