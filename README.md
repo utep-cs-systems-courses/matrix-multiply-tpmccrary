@@ -46,6 +46,21 @@ python3 main.py -pt
 
 # Report
 ## Part 2
+#### Problems
+When coding for part 2 of this assignemnt, I enountered one problem. At first, I used a regular variable and forgot to use a explicitly delcared shared variable. This lead to me getting the incorrect results from the parallel matrix multiplication algorithm, as all the threads were accessing their own matrix in memory. All that needed to be done was to declare a shared variable through `pymp`, which allowed all the threads to access that single matrix and return the correct result.
+#### Time to Complete
+In all, it took around 4 to 5 hours to complete part 2. After understanding how `pymp` works with the use of the provided examples and cheat sheat, I was able to understand how all the pieces "fit together".
+#### Performance Measurements
+This program was tested using 550x550 matrices using 1, 2, 4, and 8 threads. 
+
+1 Thread: `9.171762600000001s`<br/>
+2 Threads: `4.8797151s`<br/>
+4 Threads: `2.4673986999999986s`<br/>
+8 Threads: `1.3943424000000029s`<br/>
+
+Overall, throwing more threads at this problem helped a lot in duration. It seems doubling the threads halfs the time it takes for the algorith to complete.
+
+### Analysis
 
 ## Part 1
 Implementing the matrix multiplication functionality was straight forward and uses a simple nested "for loop" algorithm. Although, it was important to follow the mathematical constraints (like matrix 1 must have the same number of col as rows in matrix 2).<br/> 
