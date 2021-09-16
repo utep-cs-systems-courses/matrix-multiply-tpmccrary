@@ -1,10 +1,31 @@
-# About
-This Python program is an implementation of matrix multiplication, without using external libraries.<br/>
-As a test, this program will automatically use two matrices and multiply them together.
+# Matrix Multiply
 
-# Instructions to Run
-In the project root directory, use the command:
-```python3 main.py```
+Matrix Multiplly is a Python program that implements matrix multiplication without the use of external libraries.<br/>
+Additionally, a parallel algorithm has been implemented to speed up the process.
+
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install `numpy` and `pymp`.
+
+```bash
+pip install numpy
+```
+```bash
+pip install pymp-pypi
+```
+
+## Usage
+
+This program uses a CLI (commnad line interface) to recieve user input.<br/><br/>
+Use the following commands in the root folder of the program.<br/>
+For CLI help:
+```bash
+python3 main.py -h
+```
+Example usage running hard-coded parallel algorithm test:
+```bash
+python3 main.py -pt
+```
 
 # Report
 ## Part 2
