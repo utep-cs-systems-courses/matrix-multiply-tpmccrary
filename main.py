@@ -31,11 +31,11 @@ def main():
     parser.add_argument('-p', '--parallel', action="store_true",
                         help='Use parallel algorithm.')
     parser.add_argument('-nt', '--num_thread', default=1, type=int,
-                        help='(int) Number of threads to use in parallel.')
+                        help='(int, optional) Number of threads to use in parallel.')
     parser.add_argument('-f1', '--file1', default="test/matrix_550x550_5", type=str,
-                        help='(str) File path of first matrix to use.')
+                        help='(str, optional) File path of first matrix to use.')
     parser.add_argument('-f2', '--file2', default="test/matrix_550x550_10", type=str,
-                        help='(sr) File path of second matrix to use.')
+                        help='(str, optional) File path of second matrix to use.')
     
 
     args = parser.parse_args()
