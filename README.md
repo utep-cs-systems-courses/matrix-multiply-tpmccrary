@@ -2,7 +2,7 @@
 
 Matrix Multiplly is a Python program that implements matrix multiplication without the use of external libraries.<br/>
 Additionally, a parallel algorithm has been implemented to speed up the process. <br/>
-### NOTE: Report can be found at bottom of README.
+### IMPORTANT: Report can be found at bottom of README.
 
 ## Installation
 
