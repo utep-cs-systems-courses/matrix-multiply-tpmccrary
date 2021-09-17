@@ -58,10 +58,16 @@ This program was tested using 550x550 matrices using 1, 2, 4, and 8 threads.
 4 Threads: `2.4673986999999986s`<br/>
 8 Threads: `1.3943424000000029s`<br/>
 
-Overall, throwing more threads at this problem helped a lot in duration. It seems doubling the threads halfs the time it takes for the algorith to complete.
+Overall, throwing more threads at this problem reduced the duration of the algorithm. It seems doubling the threads halfs the time it takes for the algorith to complete.
 
 ### Analysis
+Before explaing why this speeds up the algorithm, I must first describe how it is implemented. This algorihtm uses 3 nested for loops; first loop for going through matrix 1 rows, second for matrix 2 columns, and third for the resulting matrix elements. This algorithm was parallelized by breaking up the row operations in matrix 1. So, instead of the algorithm going row by row, the rows are broken up, and "handed out" to different threads. For example on a 10x10 matrix, the non-parallel algorithm would start at row 1, and increment to row 10, doing the need computations along the way. The parallel algorithm distributes the work so, say, thread 1 would get rows 1 to 3, thread 2 gets rows 4 to 6, thread 3 gets 7 to 10. This breaks up the computation so they are all happening at the same time, decreasing the duration drastically, especially compared to going one at a time. 
 
+### CPU Info
+```
+model name	: AMD Ryzen 7 5800H with Radeon Graphics
+     16     160     832
+```
 ## Part 1
 Implementing the matrix multiplication functionality was straight forward and uses a simple nested "for loop" algorithm. Although, it was important to follow the mathematical constraints (like matrix 1 must have the same number of col as rows in matrix 2).<br/> 
 It is important to note, UI functionality is not incorporated. As of now, this program is meant to test matrixes that are already generated and show the matrix multiplication functionality working. The actual matrix multiplication functions can be found in the file `matrix_multiply/matrix_multiplication.py` in the `MatrixMultiplication` class. This class contains two functions: `scalar_multiply` and `matrix_multiply`, where the actual multiplication is done.<br/>
