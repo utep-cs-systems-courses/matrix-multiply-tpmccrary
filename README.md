@@ -1,3 +1,5 @@
+### Timothy P. McCrary
+
 # Matrix Multiply
 
 Matrix Multiplly is a Python program that implements matrix multiplication without the use of external libraries.<br/>
